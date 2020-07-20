@@ -1,39 +1,24 @@
 class Solution {
-    
-     public Map<Character, Integer> m;
-    
-    // String s - is a valid format Roman numeral
-    // return - int value of String s
-    public int romanToInt(String s) {
+    public int romanToInt(String S) {
         
-        m = new HashMap<>();
-        m.put('I', 1);
-        m.put('V', 5);
-        m.put('X', 10);
-        m.put('L', 50);
-        m.put('C', 100);
-        m.put('D', 500);
-        m.put('M', 1000);
+        int val = 0;
+        char prev = 'Z';
         
-        return  convert(s.toCharArray());     
-    }
-    
-    
-    private int convert(char [] c){
-        int ans = 0;
-        for(int i = 0; i< c.length; i++) {
-            if(i<c.length-1) {
-                if(c[i] == 'I' && c[i+1] == 'V')        { ans += 4;     i++;} 
-                else if (c[i] == 'I' && c[i+1] == 'X')  {ans += 9;      i++;}
-                else if (c[i] == 'X' && c[i+1] == 'L')  {ans += 40;     i++;}
-                else if (c[i] == 'X' && c[i+1] == 'C')  {ans += 90;     i++;}
-                else if (c[i] == 'C' && c[i+1] == 'D')  {ans += 400;    i++;}
-                else if (c[i] == 'C' && c[i+1] == 'M')  {ans += 900;    i++;}
-                else ans += m.get(c[i]);
+        for(char c: S.toCharArray()) {
+            int inc = 0;
+            switch(c) {
+                case 'I': inc = 1; break;
+                case 'V': inc = (prev == 'I') ? 3     : 5; break;
+                case 'X': inc = (prev == 'I') ? 8     : 10; break;
+                case 'L': inc = (prev == 'X') ? 30    : 50; break;
+                case 'C': inc = (prev == 'X') ? 80    : 100; break;
+                case 'D': inc = (prev == 'C') ? 300   : 500; break;
+                case 'M': inc = (prev == 'C') ? 800   : 1000; break;
             }
-            else ans += m.get(c[i]);
+            val = val + inc;
+            prev = c;
         }
         
-        return ans;   
+        return val;
     }
 }
