@@ -1,2 +1,2 @@
 # leetcode-sync
-Collection of accepted solutions from LeetCode user eman_name
+A collection of accepted solutions from LeetCode user [eman_name](https://leetcode.com/eman_name/)
